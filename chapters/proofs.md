@@ -1,4 +1,4 @@
-## How to Prove Programs: Understanding the Curry-Howard Correspondence
+## Proofs
 The Curry Howard correspondence is the relationship between computer programs and mathematical proofs. Specifically:
 
 1. *Types* can be interpreted as *logical claims*.
