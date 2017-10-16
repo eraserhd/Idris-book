@@ -26,7 +26,6 @@ out.
 
 <!-- yadda yadda want it to mean something? -->
 
-In C, we have lots of back doors to reinterpret the type -- it is a necessary
-practice, in fact!  So we call C "weakly typed."  Weakness would hurt us in
-Idris, since one of our goals is to prove things about our program.  So Idris
-is "strongly typed."
+C has back doors to reinterpret the type, so we call it "weakly typed."
+Weakness would hurt us in Idris, since one of our goals is to prove things
+about our program.  So Idris is "strongly typed."
