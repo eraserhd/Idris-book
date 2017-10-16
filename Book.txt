@@ -4,4 +4,5 @@ maketitle
 tableofcontents
 preface.md
 mainmatter:
+types.md
 proofs.md
