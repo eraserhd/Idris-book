@@ -6,33 +6,34 @@
   canonical values, and non-canonical expressions.
 -->
 
-In C, "type" is about how to interpret bits.  `unsigned short` and
-`signed short` both have the same number of bits, but (assuming we are using
-a compiler where `short` is 16 bits) `0xFFFF` represents either 65,535 or -1,
-depending on the memory location's type.
+### Types of Types
 
-<!-- ^^ not quite a "memory location", nor a "name" or a "variable"... what
-  is it?
+In C, "type" is how the compiler interprets memory.  A 16-bit variable with
+all bits "on" might represent 65,535 or -1, depending on whether the variable
+has the type `unsigned short` or `signed short`[^c-short].
 
--->
+In Scheme, "type" is a quality of a value rather than a variable.  A variable
+`x` might be a string here and a numeric value later.  We ask about the type
+at runtime with expressions like `(string? x)`.  We call this "dynamic typing"
+to distinguish it from C's "static typing."
 
-In a dynamically-typed langugage like Scheme, "type" is a quality of a value
-rather than a location.  We might query the type of a value with an expression
-like `(boolean? x)`, which indicates whether `x` is either the true value or
-the false value.
-
-In object-oriented languages like Smalltalk, Python, and Ruby, which methods
-can be called on the value and how those methods behave is (mostly) part of
-the type; "type" and "class" are tightly related, if not synonymous.
+In C++ or Ruby, which methods can be called on the value and how those methods
+behave is mostly part of the type; "type" and "class" are tightly related, if
+not synonymous.
 
 In ML-based languages like Haskell and Idris, type is a judgement about a
 name.  Sometimes we tell the compiler and sometimes the compiler figures it
 out.
 
-<!-- yadda yadda want it to mean something? -->
-
-C has back doors to reinterpret the type, so we call it "weakly typed."
+C allows us to reinterpret the type, so we call it "weakly typed."
 Weakness would hurt us in Idris, since one of our goals is to prove things
 about our program.  So Idris is "strongly typed."
 
 <!-- Idris has a back door... mention here? -->
+
+### Idris Types
+
+
+### Type Checking
+
+[^c-short]: Assuming your C compiler's `short`s are 16-bits.
