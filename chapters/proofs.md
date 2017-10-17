@@ -42,7 +42,7 @@ A note on logic: In classical logic we can sometimes prove things without an
 explicit witness, but we must abandon this ability to make our correspondence
 work.  This restricted logic is called *constructivist* or *intuitionistic*.
 Classically we can prove the statement, "Either England has a king, or it does
-not," without knowing which part is true – or, in fact, anything about
+not," without knowing which part is true--or, in fact, anything about
 England.  A constructivist proof of this statement requires we either present
 a proof of England having a king, or a proof of England not having a king.
 
