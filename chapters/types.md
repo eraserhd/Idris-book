@@ -11,6 +11,11 @@ In C, "type" is about how to interpret bits.  `unsigned short` and
 a compiler where `short` is 16 bits) `0xFFFF` represents either 65,535 or -1,
 depending on the memory location's type.
 
+<!-- ^^ not quite a "memory location", nor a "name" or a "variable"... what
+  is it?
+
+-->
+
 In a dynamically-typed langugage like Scheme, "type" is a quality of a value
 rather than a location.  We might query the type of a value with an expression
 like `(boolean? x)`, which indicates whether `x` is either the true value or
@@ -29,3 +34,5 @@ out.
 C has back doors to reinterpret the type, so we call it "weakly typed."
 Weakness would hurt us in Idris, since one of our goals is to prove things
 about our program.  So Idris is "strongly typed."
+
+<!-- Idris has a back door... mention here? -->
