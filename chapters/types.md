@@ -21,19 +21,25 @@ In C++ or Ruby, which methods can be called on the value and how those methods
 behave is mostly part of the type; "type" and "class" are tightly related, if
 not synonymous.
 
-In ML-based languages like Haskell and Idris, type is a judgement about a
-name.  Sometimes we tell the compiler and sometimes the compiler figures it
-out.
+In Haskell and Idris, type is a judgement about a name.  Sometimes we tell the
+compiler and sometimes the compiler figures it out.
 
-C allows us to reinterpret the type, so we call it "weakly typed."
-Weakness would hurt us in Idris, since one of our goals is to prove things
-about our program.  So Idris is "strongly typed."
+C allows--and often requires--us to reinterpret a variable of one type as a
+different type, so we call it "weakly typed."
+
+Disregarding a value's type makes proving program properties harder,
+so in Idris we don't like it[^believe-me].
+So Idris is "strongly typed."
 
 <!-- Idris has a back door... mention here? -->
 
 ### Idris Types
 
+<!-- mathematical types! -->
+<!-- what does Luo say about types? -->
+
 
 ### Type Checking
 
-[^c-short]: Assuming your C compiler's `short`s are 16-bits.
+[^c-short]: Assuming your C compiler has 16-bit shorts.
+[^believe-me]: We *do* have `believe_me`, a way to escape the type system; however, it is scary and we aren't expected to use it as a matter of course.
