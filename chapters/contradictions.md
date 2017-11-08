@@ -9,13 +9,13 @@ total funnyMath : (3 = 4) -> (4 = 7)
 funnyMath Refl impossible
 ```
 
-The type signature can be read, “From a proof that 3 is equivalent to 4, I can
-produce a proof that 4 is equivalent to 7.”
+The type signature can be read, "From a proof that 3 is equivalent to 4, I can
+always produce a proof that 4 is equivalent to 7."
 
-We can write `impossible` instead of returning a value because Idris knows
-we can't actually get a `Refl` value here.  It only learns about what’s
-possible when matching constructors, so if we don't spell out the `Refl`,
-Idris complains:
+We can write `impossible` instead of returning a value since Idris knows
+we can't actually receive a `Refl` value here.  It only learns about what’s
+possible when matching constructors, though, so if we don't spell out the
+`Refl`, Idris complains:
 
 ```idris
 total funnyMath : (3 = 4) -> (4 = 7)
@@ -27,22 +27,30 @@ Produces:
 funnyMath _ is a valid case.
 ```
 
-We can see why using `:printdef Refl`:
+We can see why using `:printdef (=)`:
 ```idris
-Refl : x = x
+data (=) : A -> B -> Type where
+  Refl : x = x
 ```
 
-Since `x` appears more than once, matching `Refl` requires Idris to
-to *unify* the different expressions for `x`.  Idris knows that `3` and `4`
-are constructed differently so it decides the case impossible.
+Since `x` appears more than once, matching `Refl` requires Idris to to *unify*
+the different expressions for `x`.  Idris knows that `3` and `4` are
+constructed differently so it decides the case impossible.  Notice there's
+nothing magical about `=` here!
 
-Notice how there's nothing magical about `=` here!
+However, unification can't find every impossible case:
 
-However, unification won’t find every impossible case.
+```idris
+total nope : x + 7 = x + 5
+nope Refl impossible
+```
 
-<!-- an example Idris can't figure out -->
+Produces:
+```
+nope Refl is a valid case
+```
 
-### `Void`
+### `Void` and `void`
 
 `Void` is the simplest impossible type:
 
@@ -50,8 +58,19 @@ However, unification won’t find every impossible case.
 data Void : Type where
 ```
 
-Since `Void` has no constructors, we can never have a value of type `Void`.
-We say it is uninhabited.
+It has no constructors, so we can never have a value of type `Void`.
+We say it is uninhabited.  We also call types like `3 = 4` uninhabited.
+
+`void` (with a lowercase "v") is a function from `Void` to *any* type, so can
+fill any hole, given an impossible value.
+
+```idris
+total foo : Void -> 6 = 42
+foo v = void v
+```
+
+Notice that we couldn't use `impossible` here, since `Void` has no constructors
+to match.
 
 ### `Not`
 
@@ -75,18 +94,13 @@ Since `Void` is uninhabited, the only way we can make a function of type
 `a -> Void` is by showing `a` has no values.  We are saying, “if there
 were a proof of `a`, it would mean something is very wrong.”
 
-### `void`
-
-The function `void` is of type `Void -> a` so can fill any impossible hole if
-you have this (impossible) value. This works when places where Idris's unifier
-cannot detect the contradiction. `Not` is defined as `Not x = x -> Void`, so
+`Not` is defined as `Not x = x -> Void`, so
 if you have a prfX and a prfNotX, the expression `void (prfNotX prfX)` can be
 used to solve an impossible case:
 
-```idris
-foo : x -> Not x -> 6 = 42
-foo p np = void (np p)
-```
+This works in places where Idris's unifier
+cannot detect the contradiction.
+
 
 ### `Uninhabited` and `absurd`
 
