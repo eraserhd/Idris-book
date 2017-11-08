@@ -6,3 +6,4 @@ preface.md
 mainmatter:
 types.md
 proofs.md
+contradictions.md
