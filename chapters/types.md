@@ -46,6 +46,8 @@ coherence.
 The rules are usually written something like this (warning: Greek letters,
 though I will fully explain):
 
+<!-- diagram this out with arrows and scratch marks -->
+
 \[\frac{
   \Gamma\vdash e_1 : \sigma\to\tau
   \quad
@@ -53,25 +55,10 @@ though I will fully explain):
 }{\Gamma\vdash e_1 e_2 : \tau}\mbox{(app)}
 \]
 
-"(app)" is the name of the typing rule.  This one is for function
-application.  It is abbreviated "app" because mathematicians are often
-worse than programmers at naming things.
-
-Above the line are assumptions; below the line are conclusions.
-
-We can safely ignore the "\(\Gamma\vdash\)".  If you are curious, it
-means something like "From our environment we can prove ..."
-
-\(e_1 : \sigma\to\tau\) means "the expression \(e_1\) has a function type
-taking an argument of type \(\sigma\) and returning a value of type \(\tau\).
-
-
-
 <!-- "terminal" and "non-terminal" values (ugh, what are they called?) -->
 <!-- Inductive types -->
 <!-- Construction/destruction -->
-
-<!-- Nat! -->
+<!-- Nat! S/Z/literals -->
 
 [^c-short]: Assuming your C compiler has 16-bit shorts.
 [^believe-me]: We *do* have `believe_me`, a way to escape the type system; however, it is scary and we aren't expected to use it as a matter of course.

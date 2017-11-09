@@ -104,6 +104,8 @@ allows us to dispatch the case with `void`.  We use this to fill a hole in a
 total function when Idris's unifier cannot detect the contradiction on its
 own:
 
+<!-- can we make a cleaner example? -->
+
 ```idris
 total
 oneLTENatNotZero : (x : Nat) -> Not (x = 0) -> 1 `LTE` x
