@@ -125,11 +125,10 @@ so we use `void` to get it.
 
 ## `Uninhabited` and `absurd`
 
-There are many useful uninhabited types which come up frequently such as
-`True = False`, `NonEmpty []`, and `IsJust Nothing`.  It would be nice if we
-didn't have to worry about the different ways to extract `Void` values from
-each of these types, and so Idris provides us with the `Uninhabited`
-interface:
+Many uninhabited types come up frequently: `True = False`, `NonEmpty []`,
+`IsJust Nothing`.  It would be nice to not worry about the different ways to
+extract `Void` values from each of these, so Idris provides us with the
+`Uninhabited` interface:
 
 ```idris
 interface Uninhabited t where
@@ -147,7 +146,7 @@ Once we have an implementation of `Uninhabited` for a type, we can use
 `absurd` -- a shortcut for `void (uninhabited x)` to solve cases.
 
 ```idris
-slime : True = False -> 42
+total slime : True = False -> 42
 slime p = absurd p
 ```
 
