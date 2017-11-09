@@ -13,7 +13,7 @@ The type signature can be read, "From any proof of `3 = 4`, I can produce a
 proof that `4 = 7`."  Alternately, "`3 = 4` implies `4 = 7`."
 
 We are able to write `impossible` instead of returning a value since Idris
-knows we can't actually receive `Refl` here.
+knows we can't actually receive `Refl` here[^omit-impossible].
 
 Idris only learns about what's possible when matching constructors, though,
 so if we don't spell out "`Refl`", Idris complains:
@@ -151,3 +151,6 @@ Now we can solve cases by calling out impossible values from empty types:
 total slime : True = False -> 42
 slime p = absurd p
 ```
+
+[^omit-impossible]: Sometimes we can just omit impossible equations, though not for `funnyMath` since we need at least one equation to convince Idris we've defined the function.
+
