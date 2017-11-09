@@ -1,4 +1,4 @@
-## Proofs
+# Proofs
 
 The Curry Howard correspondence is the relationship between computer programs
 and mathematical proofs. Specifically:
@@ -11,7 +11,7 @@ This is tricky to think about, much like the optical illusion of a dancer,
 where, if you concentrate really hard, you can reverse the direction you see
 them spinning.
 
-### Programs *are* Proofs
+## Programs *are* Proofs
 
 Let's take the Idris program:
 
@@ -67,13 +67,13 @@ computation will always succeed. It could take eons to calculate, which is
 fine--its value as a proof does not come from actually running it, but from
 knowing we could always get an answer from it if we wanted.
 
-### Evaluation
+## Evaluation
 
 In the program above, we (or the compiler) could replace `1 + 2` with `3`,
 making the proof simpler.  This is what we mean when we say that the
 evaluation of programs corresponds to the simplification of proofs.
 
-### A More Logical Example
+## A More Logical Example
 
 Above, we showed how to interpret `Nat` as a claim.  In practice, when we are
 intentionally using Curry-Howard to prove things, we'll use types which were
@@ -115,7 +115,7 @@ Specifically:
                 Integer
 ```
 
-### Proving Programs
+## Proving Programs
 
 We now have the foundation to prove properties of programs.  Since programs
 are proofs and proofs are programs, nothing stops us from putting code in our

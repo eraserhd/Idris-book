@@ -1,6 +1,6 @@
-## Contradictions
+# Contradictions
 
-### `impossible` Cases
+## `impossible` Cases
 
 In Idris, we can write:
 
@@ -33,7 +33,7 @@ data (=) : A -> B -> Type where
   Refl : x = x
 ```
 
-Since `x` appears more than once, matching `Refl` requires Idris to to *unify*
+Since `x` appears more than once, matching `Refl` requires Idris to *unify*
 the different expressions for `x`.  Idris knows that `3` and `4` are
 constructed differently so it decides the case impossible.  Notice there's
 nothing magical about `=` here!
@@ -50,29 +50,35 @@ Produces:
 nope Refl is a valid case
 ```
 
-### `Void` and `void`
+## `Void` and `void`
 
-`Void` is the simplest impossible type:
+A type is said to be "uninhabited" when there are no values of that type.
+The type `3 = 4` is uninhabited, but `Void` is the simplest uninhabited type:
 
 ```idris
 data Void : Type where
 ```
 
-It has no constructors, so we can never have a value of type `Void`.
-We say it is uninhabited.  We also call types like `3 = 4` uninhabited.
+Having no constructors, we can't create any `Void` values.  But we can still
+use it in interesting ways.
 
 `void` (with a lowercase "v") is a function from `Void` to *any* type, so can
 fill any hole, given an impossible value.
 
 ```idris
-total foo : Void -> 6 = 42
-foo v = void v
+total exFalsoQuodlibet : Void -> 6 = 42
+exFalsoQuodlibet v = void v
 ```
 
-Notice that we couldn't use `impossible` here, since `Void` has no constructors
-to match.
+Notice we can't use `impossible` here since it would require matching a
+constructor of `Void`--but the effect is the same.
 
-### `Not`
+This is an example of "the principle of explosion," often phrased, "from
+contradiction, anything follows."  In general, it is possible to prove any
+claim given contradictory premises.
+
+
+## `Not`
 
 Most kinds of logic have some kind of first-class negation.  Most programming
 languages have `!`, so that `!false` is equivalent to true.  (Idris has this
@@ -102,7 +108,7 @@ This works in places where Idris's unifier
 cannot detect the contradiction.
 
 
-### `Uninhabited` and `absurd`
+## `Uninhabited` and `absurd`
 
 `Void` is not the only uninhabited type, just the simplest.  There are many
 useful uninhabited types, for example `True = False` is uninhabited.  These
