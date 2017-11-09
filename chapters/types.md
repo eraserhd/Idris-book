@@ -1,4 +1,4 @@
-## Types
+# Types
 
 <!-- Idea -
   1. Clear up lingering ideas of "type";
@@ -6,7 +6,7 @@
   canonical values, and non-canonical expressions.
 -->
 
-### Types of Types
+## Types of Types
 
 In C, "type" is how the compiler interprets memory.  A 16-bit variable with
 all bits "on" might represent 65,535 or -1, depending on whether the variable
@@ -33,13 +33,13 @@ So Idris is "strongly typed."
 
 <!-- Idris has a back door... mention here? -->
 
-### Idris Types
+## Idris Types
 
 <!-- mathematical types! -->
 <!-- what does Luo say about types? -->
 
 
-### Type Checking
+## Type Checking
 
 [^c-short]: Assuming your C compiler has 16-bit shorts.
 [^believe-me]: We *do* have `believe_me`, a way to escape the type system; however, it is scary and we aren't expected to use it as a matter of course.
