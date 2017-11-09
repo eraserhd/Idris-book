@@ -52,7 +52,7 @@ Produces:
 nope Refl is a valid case
 ```
 
-## `Void` and `void`
+## `Void`
 
 A type is called "uninhabited" when it contains no values.  `3 = 4` is
 uninhabited.  `Void` is the simplest uninhabited type:
