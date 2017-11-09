@@ -77,6 +77,8 @@ This is an example of "the principle of explosion," often phrased, "from
 contradiction, anything follows."  In general, it is possible to prove any
 claim given contradictory premises.
 
+It is useful to think of values of `Void` as "falsity" or "contradiction."
+
 
 ## `Not`
 
@@ -97,24 +99,37 @@ Not a = a -> Void
 ```
 
 Since `Void` is uninhabited, the only way we can make a function of type
-`a -> Void` is by showing `a` has no values.  We are saying, “if there
-were a proof of `a`, it would mean something is very wrong.”
+`a -> Void` is by demonstrating `a` has no values.  A nice way to think of
+it is, "From a proof of `a`, we can show contradiction."
 
-`Not` is defined as `Not x = x -> Void`, so
-if you have a prfX and a prfNotX, the expression `void (prfNotX prfX)` can be
-used to solve an impossible case:
+Since eliminating implication corresponds to function application, we have
+a nice way to use any proof of `a` and `Not a` to produce a `Void`, which
+allows us to dispatch the case with `void`.  We use this to fill a hole in a
+total function when Idris's unifier cannot detect the contradiction on its
+own:
 
-This works in places where Idris's unifier
-cannot detect the contradiction.
+```idris
+total
+oneLTENatNotZero : (x : Nat) -> Not (x = 0) -> 1 `LTE` x
+oneLTENatNotZero Z     xNotZero = void (xNotZero Refl)
+oneLTENatNotZero (S k) xNotZero = LTESucc LTEZero
+```
+
+In the first equation, we've matched `x` with `Z`, so for the scope of this
+equation, Idris believes that `x` is the same as `0`.  This means that
+`xNotZero` on this line is a proof that `0 = 0 -> Void`.  We can easily
+provide a proof of `0 = 0` using `Refl`, so we write `(xNotZero Refl)` to
+get a value of type `Void`.  We still need a proof of ``1 `LTE` 0``, though,
+so we use `void` to get it.
 
 
 ## `Uninhabited` and `absurd`
 
-`Void` is not the only uninhabited type, just the simplest.  There are many
-useful uninhabited types, for example `True = False` is uninhabited.  These
-often come up in proofs, and we'll need a way to solve these impossible cases.
-
-For this, Idris has the `Uninhabited` interface, defined like so:
+There are many useful uninhabited types which come up frequently such as
+`True = False`, `NonEmpty []`, and `IsJust Nothing`.  It would be nice if we
+didn't have to worry about the different ways to extract `Void` values from
+each of these types, and so Idris provides us with the `Uninhabited`
+interface:
 
 ```idris
 interface Uninhabited t where
