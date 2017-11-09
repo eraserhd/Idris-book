@@ -122,9 +122,8 @@ so we use `void` to get it.
 ## `Uninhabited` and `absurd`
 
 Many uninhabited types come up frequently: `True = False`, `NonEmpty []`,
-`IsJust Nothing`.  It would be nice to not worry about the different ways to
-extract `Void` values from each of these, so Idris provides us with the
-`Uninhabited` interface:
+`IsJust Nothing`.  Idris gives us the `Uninhabited` interface so that we
+don't have to worry about how to extract `Void` values from many types:
 
 ```idris
 interface Uninhabited t where
@@ -138,11 +137,17 @@ implementation Uninhabited (True = False) where
   uninhabited Refl impossible
 ```
 
-Once we have an implementation of `Uninhabited` for a type, we can use
-`absurd` -- a shortcut for `void (uninhabited x)` to solve cases.
+If we have an implementation of `Uninhabited`, `absurd` becomes interesting:
+
+```idris
+Idris> :printdef absurd
+absurd : Uninhabited t => t -> a
+absurd h = void (uninhabited h)
+```
+
+Now we can solve cases by calling out impossible values from empty types:
 
 ```idris
 total slime : True = False -> 42
 slime p = absurd p
 ```
-
