@@ -12,34 +12,66 @@ In C, "type" is how the compiler interprets memory.  A 16-bit variable with
 all bits "on" might represent 65,535 or -1, depending on whether the variable
 has the type `unsigned short` or `signed short`[^c-short].
 
-In Scheme, "type" is a quality of a value rather than a variable.  A variable
-`x` might be a string here and a numeric value later.  We ask about the type
-at runtime with expressions like `(string? x)`.  We call this "dynamic typing"
-to distinguish it from C's "static typing."
+In Ruby or Scheme, "type" is a quality of a value rather than a variable.  A
+variable `x` might be a string here and a numeric value later.  We ask about
+the type at runtime with expressions like `(string? x)`.  We call this
+"dynamic typing" to distinguish it from C's "static typing."
 
 In C++ or Ruby, which methods can be called on the value and how those methods
 behave is mostly part of the type; "type" and "class" are tightly related, if
 not synonymous.
 
-In Haskell and Idris, type is a judgement about a name.  Sometimes we tell the
-compiler and sometimes the compiler figures it out.
+In Haskell, type is a judgement about a name.  Sometimes we tell the compiler
+and sometimes the compiler figures it out.
 
 C allows--and often requires--us to reinterpret a variable of one type as a
 different type, so we call it "weakly typed."
 
-Disregarding a value's type makes proving program properties harder,
-so in Idris we don't like it[^believe-me].
-So Idris is "strongly typed."
-
-<!-- Idris has a back door... mention here? -->
-
 ## Idris Types
+
+Idris is statically typed, strongly typed[^believe-me], and types are
+judgements applied to names.
+
+In Idris, types are not so much an implementation detail, as in C, but a
+foundational piece of the logical system that allows us to *prove* programs.
 
 <!-- mathematical types! -->
 <!-- what does Luo say about types? -->
 
-
 ## Type Checking
+
+Idris has a system of typing rules that it uses to ensure a program's
+coherence.
+
+The rules are usually written something like this (warning: Greek letters,
+though I will fully explain):
+
+\[\frac{
+  \Gamma\vdash e_1 : \sigma\to\tau
+  \quad
+  \Gamma\vdash e_2 : \sigma
+}{\Gamma\vdash e_1 e_2 : \tau}\mbox{(app)}
+\]
+
+"(app)" is the name of the typing rule.  This one is for function
+application.  It is abbreviated "app" because mathematicians are often
+worse than programmers at naming things.
+
+Above the line are assumptions; below the line are conclusions.
+
+We can safely ignore the "\(\Gamma\vdash\)".  If you are curious, it
+means something like "From our environment we can prove ..."
+
+\(e_1 : \sigma\to\tau\) means "the expression \(e_1\) has a function type
+taking an argument of type \(\sigma\) and returning a value of type \(\tau\).
+
+
+
+<!-- "terminal" and "non-terminal" values (ugh, what are they called?) -->
+<!-- Inductive types -->
+<!-- Construction/destruction -->
+
+<!-- Nat! -->
 
 [^c-short]: Assuming your C compiler has 16-bit shorts.
 [^believe-me]: We *do* have `believe_me`, a way to escape the type system; however, it is scary and we aren't expected to use it as a matter of course.
