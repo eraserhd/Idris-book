@@ -8,6 +8,12 @@
 
 ## Types of Types
 
+<!--
+  TODO: Per discussion with Max: Non-programming types are that we have
+  preexisting objects and we organize them into types, but in computers, we
+  have a more constructive notion.
+-->
+
 In C, "type" is how the compiler interprets memory.  A 16-bit variable with
 all bits "on" might represent 65,535 or -1, depending on whether the variable
 has the type `unsigned short` or `signed short`[^c-short].
