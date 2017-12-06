@@ -6,8 +6,6 @@
   canonical values, and non-canonical expressions.
 -->
 
-## Types of Types
-
 <!--
   TODO: Per discussion with Max: Non-programming types are that we have
   preexisting objects and we organize them into types, but in computers, we
@@ -16,30 +14,39 @@
 
 In C, "type" is how the compiler interprets memory.  A 16-bit variable with
 all bits "on" might represent 65,535 or -1, depending on whether the variable
-has the type `unsigned short` or `signed short`[^c-short].
+is `unsigned` or `signed`.  We often tell a C compiler to treat a variable as
+if it had a different type (called _casting_).  Because we can do this, and
+because we are expected to do so as a matter of course, we call C "weakly
+typed."  It is useful to think of C-style types as annotations which help the
+compiler understand how to arrange and access memory.
 
-In Ruby or Scheme, "type" is a quality of a value rather than a variable.  A
-variable `x` might be a string here and a numeric value later.  We ask about
-the type at runtime with expressions like `(string? x)`.  We call this
-"dynamic typing" to distinguish it from C's "static typing."
+In Ruby or Scheme, "type" is a quality of a value instead of a variable.  A
+single variable `x` might contain a string here and a number later.  We ask
+about type at runtime with expressions like `(string? x)`.  We call this
+"dynamic typing" to distinguish it from C's "static typing."  We generally
+can't inspect how a value is arranged in memory or reinterpret it without
+using built-in operations which know how to do so safely.
 
 In C++ or Ruby, which methods can be called on the value and how those methods
-behave is mostly part of the type; "type" and "class" are tightly related, if
-not synonymous.
+behave is mostly part of the type; "type" and "class" are tightly related
+when not synonymous. <!-- strike this paragraph? -->
 
 In Haskell, type is a judgement about a name.  Sometimes we tell the compiler
 and sometimes the compiler figures it out.
 
-C allows--and often requires--us to reinterpret a variable of one type as a
-different type, so we call it "weakly typed."
-
-## Idris Types
-
-Idris is statically typed, strongly typed[^believe-me], and types are
-judgements applied to names.
+Idris is statically typed, strongly typed, and types are
+judgments applied to names.
 
 In Idris, types are not so much an implementation detail, as in C, but a
 foundational piece of the logical system that allows us to *prove* programs.
+
+We assert a type for a name with `:`, like so:
+
+```idris
+myName : Int
+```
+
+In Idris and type theory, this is how we say `myName` has type `Int`.
 
 <!-- mathematical types! -->
 <!-- what does Luo say about types? -->
@@ -49,22 +56,11 @@ foundational piece of the logical system that allows us to *prove* programs.
 Idris has a system of typing rules that it uses to ensure a program's
 coherence.
 
-The rules are usually written something like this (warning: Greek letters,
-though I will fully explain):
+The rules are usually written something like this:  If I have an
+expression of type `x : a `a` and a function of type `a -> b` (read, "takes
+an `a` and produces a `b`), and they are
 
-<!-- diagram this out with arrows and scratch marks -->
-
-\[\frac{
-  \Gamma\vdash e_1 : \sigma\to\tau
-  \quad
-  \Gamma\vdash e_2 : \sigma
-}{\Gamma\vdash e_1 e_2 : \tau}\mbox{(app)}
-\]
-
-<!-- "terminal" and "non-terminal" values (ugh, what are they called?) -->
+<!-- canonical and "non-terminal" values (ugh, what are they called?) -->
 <!-- Inductive types -->
 <!-- Construction/destruction -->
 <!-- Nat! S/Z/literals -->
-
-[^c-short]: Assuming your C compiler has 16-bit shorts.
-[^believe-me]: We *do* have `believe_me`, a way to escape the type system; however, it is scary and we aren't expected to use it as a matter of course.
