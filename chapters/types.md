@@ -27,10 +27,6 @@ about type at runtime with expressions like `(string? x)`.  We call this
 can't inspect how a value is arranged in memory or reinterpret it without
 using built-in operations which know how to do so safely.
 
-In C++ or Ruby, which methods can be called on the value and how those methods
-behave is mostly part of the type; "type" and "class" are tightly related
-when not synonymous. <!-- strike this paragraph? -->
-
 In Haskell, type is a judgement about a name.  Sometimes we tell the compiler
 and sometimes the compiler figures it out.
 
