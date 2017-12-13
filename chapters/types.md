@@ -30,8 +30,8 @@ using built-in operations which know how to do so safely.
 In Haskell, type is a judgement about a name.  Sometimes we tell the compiler
 and sometimes the compiler figures it out.
 
-Idris is statically typed, strongly typed, and types are
-judgments applied to names.
+Idris is statically typed, strongly typed, and types are judgments applied to
+names.
 
 In Idris, types are not so much an implementation detail, as in C, but a
 foundational piece of the logical system that allows us to *prove* programs.
@@ -47,7 +47,14 @@ In Idris and type theory, this is how we say `myName` has type `Int`.
 <!-- mathematical types! -->
 <!-- what does Luo say about types? -->
 
-## Type Checking
+## Construction/destruction
+
+<!-- Construction/destruction -->
+
+## Canonical and Non-Canonical Values
+
+<!-- canonical and "non-terminal" values (ugh, what are they called?) -->
+<!-- Inductive types -->
 
 Idris has a system of typing rules that it uses to ensure a program's
 coherence.
@@ -56,7 +63,6 @@ The rules are usually written something like this:  If I have an
 expression of type `x : a `a` and a function of type `a -> b` (read, "takes
 an `a` and produces a `b`), and they are
 
-<!-- canonical and "non-terminal" values (ugh, what are they called?) -->
-<!-- Inductive types -->
-<!-- Construction/destruction -->
+
+
 <!-- Nat! S/Z/literals -->
